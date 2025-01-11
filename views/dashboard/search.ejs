@@ -1,0 +1,24 @@
+<div class="container-fluid container-fluid-custom pb-5 mb-5">
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <% if (searchResults.length > 0) { %>
+          <div class="search-results-container">
+            <% searchResults.forEach(function (note, index) { %>
+              <div class="search-result-item mb-3">
+                <a href="/dashboard/item/<%= note._id %>">
+                  <h4><%= note.title %></h4>
+                </a>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="search-results-container text-center">
+            <p>No items found.</p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  
+  </div>
+  

@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+    <a href="/dashboard" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-primary text-decoration-none fw-bold fs-2">
+      Notes
+    </a>
+
+    <form class="nav col-12 col-md-auto flex-fill mb-2 justify-content-center mb-md-0 position-relative" role="search" method="POST" action="/dashboard/search" style="margin-top: 1rem;">
+      <input type="search" id="searchInput" name="searchTerm" class="form-control border-primary" placeholder="Search" aria-label="Search">
+      <i class="fas fa-search search-icon position-absolute top-50 end-0 translate-middle-y pe-3" style="color: #12296c; font-size: 1.2rem;"></i>
+    </form>
+
+    <div class="col-md-3 text-end" style="margin-top: 1rem;">
+      <a href="/logout" type="button" class="btn btn-outline-primary">Logout</a>
+    </div>
+  </header>
+</div>
