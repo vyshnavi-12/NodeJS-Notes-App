@@ -112,4 +112,4 @@ GOOGLE_CALLBACK_URL=http://localhost:5001/google/callback
 If you have any questions or need help, please open an issue in the repository.
 
 ---
-Made with ❤️ by Sri Vyshnavi
+Made by Sri Vyshnavi
