@@ -101,13 +101,9 @@ GOOGLE_CALLBACK_URL=http://localhost:5001/google/callback
 4. Push to the branch: `git push origin feature/YourFeature`
 5. Submit a pull request
 
-## License 📄
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Support 🙋‍♂️
 
 If you have any questions or need help, please open an issue in the repository.
 
 ---
-Made with ❤️ by [Your Name]
+Made with ❤️ by Sri Vyshnavi
