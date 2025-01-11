@@ -101,6 +101,12 @@ GOOGLE_CALLBACK_URL=http://localhost:5001/google/callback
 4. Push to the branch: `git push origin feature/YourFeature`
 5. Submit a pull request
 
+## 📧 Contact
+
+- GitHub: [@vyshnavi-12](https://github.com/vyshnavi-12)
+- LinkedIn: [@sri-vyshnavi-nakka](https://www.linkedin.com/in/sri-vyshnavi-nakka-38136428b/)
+- Email: [srivyshnavinakka@gmail.com](mailto:srivyshnavinakka@gmail.com)
+
 ## Support 🙋‍♂️
 
 If you have any questions or need help, please open an issue in the repository.
