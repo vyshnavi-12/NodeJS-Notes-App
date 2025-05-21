@@ -1,5 +1,4 @@
-# NodeJS-Notes-App
-# Notes Application 📝
+# NodeJS-Notes-App📝
 
 A full-stack web application for creating and managing personal notes with Google OAuth authentication.
 
