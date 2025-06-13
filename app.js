@@ -7,6 +7,7 @@ const connectDB = require('./server/config/db');
 const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
+const chatbotRoutes = require("./server/routes/chatbot");
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -44,11 +45,7 @@ app.set('view engine', 'ejs');
 app.use('/', require('./server/routes/auth'));
 app.use('/', require('./server/routes/index'));
 app.use('/', require('./server/routes/dashboard'));
-
-// Handle 404
-app.get('*', function (req, res) {
-    res.status(404).render('404');
-});
+app.use("/api", chatbotRoutes);
 
 // Root Route
 app.get('/', function (req, res) {
@@ -57,6 +54,11 @@ app.get('/', function (req, res) {
         description: 'Free NodeJs Notes App',
     };
     res.render('index', locals);
+});
+
+// Handle 404
+app.get('*', function (req, res) {
+    res.status(404).render('404');
 });
 
 app.listen(port, () => {

@@ -1,101 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%- locals.title %></title>
-  <meta name="description" content="<%- locals.description %>">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Unbounded:wght@300;700&display=swap" rel="stylesheet">
-  <!-- Include Font Awesome (Add this in your main layout or HTML <head>) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* Add this CSS to your stylesheet */
-    .search-icon-hidden {
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%- locals.title %></title>
+    <meta name="description" content="<%- locals.description %>" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Unbounded:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <style>
+      .search-icon-hidden {
         display: none;
-    }
-    .view-note {
-        margin: 0 auto; /* Center horizontally */
-        padding-left: 5rem; /* Space on left */
-        padding-right: 5rem; /* Space on right */
-        padding-top: 2rem; /* Space on top */
-        padding-bottom: 2rem; /* Space on bottom */
-        max-width: 1200px; /* Adjust as needed */
-    }
-    .note-title {
-        font-size: 1.9rem; /* Adjust size to match buttons */
-    }
-    .add-note {
-        margin: 0 auto; /* Center horizontally */
-        padding-left: 5rem; /* Space on left */
-        padding-right: 5rem; /* Space on right */
-        padding-top: 2rem; /* Space on top */
-        padding-bottom: 2rem; /* Space on bottom */
-        max-width: 1200px; /* Adjust as needed */
-    }
-    .pin-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem; /* Adjust size as needed */
-    color: #f39c12; /* Color of the pin icon, adjust as needed */
-    cursor: pointer; /* Pointer cursor on hover */
-  }
-  /* Center the container and give it a white background */
-.search-results-container {
-  background-color: white;
-  padding: 25px; /* Adjust padding to reduce container size */
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  max-width: 760px; /* Adjust max-width to reduce container size */
-  margin: auto; /* Center the container horizontally */
-}
+      }
 
-/* Remove underline from links and set text color */
-.search-result-item a {
-  text-decoration: none;
-  color: #12296c; /* Set text color */
-  font-size: 0.5rem; /* Decrease font size */
-}
+      .view-note,
+      .add-note {
+        margin: 0 auto;
+        padding: 2rem 5rem;
+        max-width: 1200px;
+      }
 
-/* Add some spacing between items */
-.search-result-item {
-  margin-bottom: 10px; /* Reduce spacing between items */
-}
+      .note-title {
+        font-size: 1.9rem;
+      }
 
-/* Ensure that the container is centered horizontally */
-.row.justify-content-center {
-  justify-content: center;
-}
+      .pin-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        color: #f39c12;
+        cursor: pointer;
+      }
 
-</style>
+      .search-results-container {
+        background-color: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        max-width: 760px;
+        margin: auto;
+      }
 
-</head>
-<body>
+      .search-result-item a {
+        text-decoration: none;
+        color: #12296c;
+        font-size: 0.5rem;
+      }
 
-  <%- include('../partials/header_dashboard.ejs') %>
-  <%- body %>
-  <%- include('../partials/footer.ejs') %>
+      .search-result-item {
+        margin-bottom: 10px;
+      }
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var searchInput = document.getElementById('searchInput');
-      var searchIcon = document.querySelector('.search-icon');
-  
-      searchInput.addEventListener('input', function() {
-        if (searchInput.value.trim() !== '') {
-          searchIcon.classList.add('search-icon-hidden');
-        } else {
-          searchIcon.classList.remove('search-icon-hidden');
+      .row.justify-content-center {
+        justify-content: center;
+      }
+
+      /* Chatbot */
+      .chatbot-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 1000;
+        padding: 0;
+        background: transparent;
+        animation: sway 2.5s infinite ease-in-out;
+      }
+
+      .chatbot-button img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        pointer-events: none;
+      }
+
+      @keyframes sway {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(2px) rotate(1deg);
+        }
+        50% {
+          transform: translateX(0);
+        }
+        75% {
+          transform: translateX(-2px) rotate(-1deg);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .chatbot-container {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 300px;
+        height: 400px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .chatbot-container.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .chat-header {
+        background: #f5f5f5;
+        padding: 10px 15px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+
+      .chat-body {
+        flex-grow: 1;
+        padding: 10px;
+        overflow-y: auto;
+        font-size: 0.9rem;
+      }
+
+      .chat-input {
+        display: flex;
+        border-top: 1px solid #eee;
+        padding: 10px;
+        gap: 8px;
+        align-items: center;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+
+      .chat-input input {
+        flex-grow: 1;
+        border: 1px solid #ddd;
+        padding: 12px 16px;
+        outline: none;
+        border-radius: 25px;
+        font-size: 14px;
+        transition: border-color 0.3s ease;
+      }
+
+      .chat-input input:focus {
+        border-color: #12296c;
+      }
+
+      .chat-input button {
+        background: #12296c;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+      }
+
+      .chat-input button:hover {
+        background: #0043a8;
+        transform: scale(1.05);
+      }
+
+      .chat-input button:active {
+        transform: scale(0.95);
+      }
+
+      .bot-msg,
+      .user-msg {
+        background-color: #f1f1f1;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        border-radius: 10px;
+        max-width: 80%;
+      }
+
+      .user-msg {
+        background-color: #d0e6ff;
+        align-self: flex-end;
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: #666;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+      }
+
+      .close-btn:hover {
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../partials/header_dashboard.ejs') %> <%- body %> <%-
+    include('../partials/footer.ejs') %>
+
+    <!-- Chatbot Toggle Button -->
+    <div id="chatbot-toggle" class="chatbot-button">
+      <img src="/img/ChatBot.png" alt="Chatbot" />
+    </div>
+
+    <!-- Chatbot Window (API-Based) -->
+    <div id="chatbot-container" class="chatbot-container">
+      <div class="chat-header">
+        Ask Noto
+        <button class="close-btn" id="close-chatbot">&times;</button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="bot-msg">Hi! Ask me anything about your notes 📝</div>
+      </div>
+      <div class="chat-input">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Type your question..."
+        />
+        <button id="send-msg">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chatbot Script -->
+     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const chatbotToggle = document.getElementById("chatbot-toggle");
+        const chatbotContainer = document.getElementById("chatbot-container");
+        const closeBtn = document.getElementById("close-chatbot");
+        const chatBody = document.getElementById("chat-body");
+        const inputField = document.getElementById("chat-input");
+        const sendBtn = document.getElementById("send-msg");
+
+        // Show/hide chatbot
+        chatbotToggle.addEventListener("click", () => {
+          chatbotContainer.classList.toggle("show");
+        });
+
+        closeBtn.addEventListener("click", () => {
+          chatbotContainer.classList.remove("show");
+        });
+
+        // Send message on button click or Enter key
+        sendBtn.addEventListener("click", sendMessage);
+        inputField.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") sendMessage();
+        });
+
+        // Function to handle suggested questions
+        window.askSuggestion = function (question) {
+          inputField.value = question;
+          sendMessage();
+        };
+
+        // Append message to chat
+        function appendMessage(sender, message) {
+          const msg = document.createElement("div");
+          msg.className = sender === "user" ? "user-msg" : "bot-msg";
+          msg.innerHTML = message.replace(/\n/g, "<br>"); // Handle line breaks
+          chatBody.appendChild(msg);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Send message to backend
+        async function sendMessage() {
+          const text = inputField.value.trim();
+          if (!text) return;
+
+          appendMessage("user", text);
+          inputField.value = "";
+
+          // Show loading message
+          const loadingMsg = document.createElement("div");
+          loadingMsg.className = "bot-msg";
+          loadingMsg.innerHTML = "🤔 Thinking about your notes question...";
+          loadingMsg.id = "loading-msg";
+          chatBody.appendChild(loadingMsg);
+          chatBody.scrollTop = chatBody.scrollHeight;
+
+          try {
+            console.log("🚀 Sending notes question:", text);
+
+            const res = await fetch("/api/ask", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ question: text }),
+            });
+
+            // Remove loading message
+            const loadingElement = document.getElementById("loading-msg");
+            if (loadingElement) {
+              loadingElement.remove();
+            }
+
+            console.log("📥 Response status:", res.status);
+
+            if (!res.ok) {
+              const errorData = await res.json().catch(() => ({}));
+              console.error("❌ Server error:", errorData);
+
+              let errorMessage =
+                "❌ Something went wrong. Try asking about note-taking!";
+              if (res.status === 429) {
+                errorMessage =
+                  "❌ Too many questions! Please wait and ask about your notes again.";
+              } else if (res.status === 403) {
+                errorMessage =
+                  "❌ I'm having trouble connecting. Try asking about study tips later!";
+              }
+
+              appendMessage("bot", errorMessage);
+              return;
+            }
+
+            const data = await res.json();
+            console.log("✅ Received response:", data);
+
+            appendMessage(
+              "bot",
+              data.answer ||
+                "❌ Sorry, I couldn't help with that. Try asking about note-taking or studying!"
+            );
+          } catch (err) {
+            console.error("❌ Chatbot Error:", err);
+
+            // Remove loading message if it exists
+            const loadingElement = document.getElementById("loading-msg");
+            if (loadingElement) {
+              loadingElement.remove();
+            }
+
+            appendMessage(
+              "bot",
+              "❌ Connection error. Please try asking about notes or studying again!"
+            );
+          }
         }
       });
-    });
-  </script>
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-</body>
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
